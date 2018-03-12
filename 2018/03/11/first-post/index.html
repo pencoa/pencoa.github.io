@@ -1,172 +1,615 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
+    <!-- title -->
 
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录 · Digital World</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180304 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180304 media="(max-width: 980px)"/>
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
   
-  <title>first-post | 猪圈</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="first-post">
-<meta property="og:url" content="http://pencoa.github.io/2018/03/11/first-post/index.html">
-<meta property="og:site_name" content="猪圈">
-<meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-03-11T03:01:48.460Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="first-post">
-  
-    <link rel="alternate" href="/atom.xml" title="猪圈" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">猪圈</a>
-      </h1>
-      
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Digital World</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</a>
+            </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pencoa.github.io"></form>
-      </div>
-    </div>
-  </div>
+    
+    <a class="home-link" href=/>Digital World</a>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-first-post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/11/first-post/" class="article-date">
-  <time datetime="2018-03-11T03:01:48.000Z" itemprop="datePublished">2018-03-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      first-post
-    </h1>
-  
+    <div class="wrapper">
+        <div class="site-intro" style=
 
-      </header>
+
+
+
+
+
+height:50vh;
+
+>
     
-    <div class="article-entry" itemprop="articleBody">
-      
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
         
-      
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 知识图谱>知识图谱</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/03/11</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pencoa.github.io/2018/03/11/first-post/" data-id="cjem7sbr60000uhbpjqe7aylw" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-  
-</article>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
-</section>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>这是一场主题为知识图谱的学术讨论会，<a href="http://www.bit.edu.cn/tzgg17/jzyg2/151075.htm" target="_blank" rel="noopener">会议通知</a>  </p>
+<h3 id="知识图谱前沿课程介绍"><a href="#知识图谱前沿课程介绍" class="headerlink" title="知识图谱前沿课程介绍"></a>知识图谱前沿课程介绍</h3><p>作为组织方的北理工大数据学习中心做开场白，介绍了这几年，北理工在大数据学习方面的努力，系列课程、讲座，同学们的自组织学习以及成果展示。<br>也预告了今年的教学安排。觉得在北理工的学习环境挺好的，有点羡慕呀。  </p>
+<h3 id="知识图谱与认知智能"><a href="#知识图谱与认知智能" class="headerlink" title="知识图谱与认知智能"></a>知识图谱与认知智能</h3><p><strong>主讲人：肖仰华@复旦大学计算机学院</strong><br>肖老师的讲解偏向背景介绍，介绍了这场讨论的主题，引入了为什么要做知识图谱的研究，穿插介绍了其他嘉宾的话题与知识图谱的关系。还介绍了复旦知识工场的工作。  </p>
+<blockquote>
+<p>计算智能–&gt;感知智能–&gt;认知智能</p>
+</blockquote>
+<p>计算智能指规则明确特定领域的数据分析优化，感知智能指类似人的视觉语音信号处理感知能力，认知智能指能够理解人的语言进行推理和解释<br>回顾最近几年人工智能发展的热潮，机器在计算智能、感知智能领域已经超越了人类。依靠大数据、运算能力带来的红利已经不再明显，这些领域的性能提升遇到天花板。<br>要进一步提升，需要给计算机提供更多常识与现实世界的知识，人们开始重新关注认知智能。而知识图谱，则是给机器提供知识的一项核心工作。<br>接下来，介绍了几个知识图谱的使用场景。包含：搜索、推荐、解释、自然人机交互、深层关系发现、推理。<br>其中一个是智能推荐，通过构建场景的知识图谱，可以对场景进行任务的感知。<br>比如说，当一个用户在搜索九寨沟的时候，可以向用户推荐登山用具。背后有基于知识图谱的逻辑推理：  </p>
+<blockquote>
+<p>九寨沟–&gt;山区–&gt;登山–&gt;登山用具</p>
+</blockquote>
+<p>通过这种方式，可以从基于行为的推荐发展到行为与语义结合的推荐。  </p>
+<p>回顾了过去的知识工程，曾经在7080年代火热，但是并没能对工业界产生足够大的影响。因为当时主要由专家手工编辑，规模小，达不到应用需求。而现在互联网的发展与自然语言处理技术的进步，使得有可能构造大规模的知识图谱，引导知识工程的复兴。  </p>
+<blockquote>
+<p>Small Knowledge + big data = big Knowledge</p>
+</blockquote>
+<p>在互联网时代，用户需求多样，范围广，对精度的要求不高，开放域的知识图谱也可以满足需求。<br>同时，在跟工业界的交流中，发现很多领域原本想做垂直领域的知识图谱，后来发现在构造的过程中知识的边界很容易被突破，变成需要通用的知识。<br>在以上环节的介绍中，分别对应了知识工程的CN-DBpedia和CN-Probase等项目。<a href="kw.fudan.edu.cn/about/">知识工场</a><br>最后对未来的展望：  </p>
+<blockquote>
+<p>NLP + KB = NLU</p>
+</blockquote>
+<h3 id="Event-Extraction-From-Texts"><a href="#Event-Extraction-From-Texts" class="headerlink" title="Event Extraction From Texts"></a>Event Extraction From Texts</h3><p><strong>主讲人：刘康@中科院自动化所</strong><br>这是我特别关注的一个主题，主讲人分享了他们在金融事件抽取的工作，以及当中的一些技巧。<br>以往，知识抽取通常是实体、关系的抽取。在构建以事件为中心的知识图谱时，无论是格式还是步骤都会有所不同。<br>在事件为主的知识图谱中，每种事件会有不同的事件帧结构，比如地震事件会有日期、强度、深度、伤亡人数、地震中心等。<br>基于事件知识图谱，可以进行关系描述，因果时序分析。  </p>
+<p>对事件进行定义，涉及到参与者的特殊事情发生了。<br>在抽取事件当中，会涉及事件的触发词、事件类型、事件变量以及变量的类型。  </p>
+<p>抽取事件的步骤是：  </p>
+<ul>
+<li>事件识别</li>
+<li>事件类型的识别</li>
+<li>寻找事件相关变量</li>
+<li>事件变量的类型识别</li>
+</ul>
+<p>跟关系抽取比起来，事件抽取中往往没有具体的名词短语来直接表示事件。因此需要寻找事件的触发词，这个触发词通常为动词短语。<br>比如，在一个 Personnel End-Position 的事件当中，触发词是 quit 而不是 end-position.<br>e.g Barry Diller on Wednesday quit as chief of Vivendi Universal Entertainment.  </p>
+<p>关系抽取是发现两个所给实体之间的关系；事件抽取是发现一个事件和实体之间的关系。<br>用图片演示事件抽取的工作流程。  </p>
+<p>接着分享了一些 tricky 的工作，如何做回标得到大量训练语料。<br>人工标注数据的成本较高，因此使用已有的结构化数据去回标新的语料去训练，能够识别更多新的模式。<br>在关系抽取当中，会把关系的主体、客体和语料进行对比，发现一个句子中同时包含主体、客体时进行回标，这样能产生更多训练数据，不过也会引入噪声。<br>在事件抽取中，这种方法not work. 事件的图结构与关系的图结构不一样。在事件的图谱中，先识别出重要的变量，当这些重要的变量存在的时候，事件发生的概率就高了。比如，在结婚的事件当中，新郎跟新娘是重要变量，时间不是重要变量。当一个句子中存在事件的重要变量时，进行回标，然后训练，得到抽取器来识别 trigger word. 得到 trigger word 后跟外部数据源对比进行增删，然后再用 trigger word 进行再次回标，得到更多数据。  </p>
+<p>他们组用这种方法，从公告、新闻当中去抽取金融事件。  </p>
+<p>他们在自己的工作当中使用了神经网络的方法，并且使用了多种池化，能够提升性能。  </p>
+<p><a href="https://www.ldc.upenn.edu" target="_blank" rel="noopener">语料数据来源LDC</a></p>
+<h3 id="知识图谱与智能问答"><a href="#知识图谱与智能问答" class="headerlink" title="知识图谱与智能问答"></a>知识图谱与智能问答</h3><p><strong>主讲人：赵洲@浙江大学</strong><br>剩余时间不多，语速飞快，ppt翻页像风一样自由。<br>内容偏概论，介绍了一些垂直领域的问答机器人应用，包含医疗、教育、金融、法律等方向。<br>介绍了基于知识库、上下文以及注意力模型去构建聊天机器人的方案。  </p>
+<hr>
+<p>上午偏学术界，下午偏工业界的分割线</p>
+<hr>
+<h3 id="From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference"><a href="#From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference" class="headerlink" title="From Large Scale Graph Analytics To Knowledge Graph Inference"></a>From Large Scale Graph Analytics To Knowledge Graph Inference</h3><p><strong>主讲人：夏应龙@华为</strong><br>这个主题偏向于知识图谱的系统与基础设施。<br>知识图谱的规模从小到大的时候，性能会在中间规模时有所下降。在小机器中存储知识图谱，性能很好，但是不能承载大规模的知识图谱，不幸的是，工业级的KG往往比较大，需要在多个主机中运行。尝试使用各种开源项目构建，发现相互之间割离，导致性能下降。从操作系统的角度进行了性能分析。<br>为此，华为研发了一套工业级的知识图谱系统Eywa，进行了介绍。  </p>
+<h3 id="当知识图谱遇见个性化推荐"><a href="#当知识图谱遇见个性化推荐" class="headerlink" title="当知识图谱遇见个性化推荐"></a>当知识图谱遇见个性化推荐</h3><p><strong>主讲人：张富峥@MSRA</strong><br>开头回顾了推荐系统的发展。<br>在进行推荐的时候，如果能够有可解释性，更能让用户接受。<br>之前在做美妆的时候发现，比起那些直接提供方案的，对用户的脸型特征进行分析，结合一套美学理论去分析然后再提供方案的造型师会有更多的粉丝。<br>而知识图谱的参与，能够给推荐系统带来更多的可解释性。<br>比如，在推荐电影的时候，可以根据用户喜欢的电影去推荐同一个导演或者同一个主演的电影。但是，这个跟Netflix的细粒度标签推荐推荐有什么差异呢？<br>比较好的效果是在新闻推荐领域，他们基于微软的Probase的部分子图，构建了知识图谱。通过知识图谱的路径关系进行推荐。比如，用户在对特朗普的新闻感兴趣时，也可能会对政治、以色列等话题感兴趣。这种路径的方式更符合用户的认知。在实验过程中，他们发现用户兴趣点在知识图谱中存在一个涟漪效应。跟原有兴趣点路径关系短的话题或存在多条路径连接的话题，用户会更感兴趣。<br>此处应该有图示<br>在实验中，他们对知识图谱的路径关系进行了embedding，加入到神经网络中，与用户标签、内容标签等共同训练，并对比了多种训练方式的效果。  </p>
+<p>Ref:</p>
+<ul>
+<li>Knowledge Graph Embedding</li>
+<li>Deep Knowledge - Aware Network (DKN)</li>
+<li>Collaborative Knowledge base Embedding (CKE)</li>
+<li>Ripple Network</li>
+<li>Multi-task learning for Knowledge graph enhanced Recommendation (MKR)</li>
+</ul>
+<h3 id="基于概念知识图谱的短文本理解"><a href="#基于概念知识图谱的短文本理解" class="headerlink" title="基于概念知识图谱的短文本理解"></a>基于概念知识图谱的短文本理解</h3><p><strong>主讲人：王仲远@美团点评</strong><br>介绍了他之前在微软亚研院的工作，结合概念知识图谱去理解短文本。微软构建了一套概念知识图谱Probase.<br>在遇到一个多义词时，先将该词语在概念上定位到一个 basic level, 不能太宽泛，也不能太窄以至于没有共性。比如微软的概念是 software company , 而不是 company or largest OS service company.<br>在文本中遇到这个词的时候，结合上下文进行推断，应该属于哪个概念。<br>比如， python 同时有编程语言与蟒蛇两套概念，在 python tutorial 中，编程语言更常与教程连接，因此更可能是指编程语言；在 horrible python 中，蛇类有可怕的特点，因此更可能指代蟒蛇。<br>结尾是广告时间：美团点评拥有大量数据，欢迎大家进行合作研究，省下许多爬虫的精力。嗯，有数据的都是大佬。  </p>
+<h3 id="cnSchema：开放中文知识图谱的普通话"><a href="#cnSchema：开放中文知识图谱的普通话" class="headerlink" title="cnSchema：开放中文知识图谱的普通话"></a>cnSchema：开放中文知识图谱的普通话</h3><p><strong>主讲人：丁力@海知智能</strong><br>回顾了知识图谱的发展，指出cnSchema的意义。呼吁大家参与到cnSchema的构建当中来。<br>使用同一套标准能够有助于不同数据源的合并。原本并没有引起工业界重视，随着搜索引擎对schema进行优化，也被越来越多的厂商接受。<br>广告时间：欢迎加入海知智能，欢迎共同构建cnSchema.  </p>
+<h3 id="知识图谱在图灵机器人的落地与应用"><a href="#知识图谱在图灵机器人的落地与应用" class="headerlink" title="知识图谱在图灵机器人的落地与应用"></a>知识图谱在图灵机器人的落地与应用</h3><p><strong>主讲人：魏晨@图灵机器人</strong><br>开头用视频演示了图灵机器人的效果。<br>接着讲了知识图谱如何应用在图灵机器人中。<br>比如，用户生活习惯的图谱，情景处理的图谱。<br>因为是做产品，所以有更多的数据分析，从用户数据判断哪些功能因为常用而重要，哪些功能因为少用而可以使用简单方案处理。<br>广告时间：欢迎加入图灵机器人。  </p>
+<p>会议的PPT尚未发布，因此使用文字简短记录。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
         
-          <aside id="sidebar">
-  
+    
+        
+            
+                <a href="mailto:orz@f2cafe.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/pencoa" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
     
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
-  </div>
-
-
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/03/11/first-post/">first-post</a>
-          </li>
-        
-      </ul>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
     </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Randy Pen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
     </div>
-  </div>
+    
 </footer>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
 
 
 
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱前沿课程介绍"><span class="toc-number">1.</span> <span class="toc-text">知识图谱前沿课程介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱与认知智能"><span class="toc-number">2.</span> <span class="toc-text">知识图谱与认知智能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Extraction-From-Texts"><span class="toc-number">3.</span> <span class="toc-text">Event Extraction From Texts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱与智能问答"><span class="toc-number">4.</span> <span class="toc-text">知识图谱与智能问答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference"><span class="toc-number">5.</span> <span class="toc-text">From Large Scale Graph Analytics To Knowledge Graph Inference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#当知识图谱遇见个性化推荐"><span class="toc-number">6.</span> <span class="toc-text">当知识图谱遇见个性化推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于概念知识图谱的短文本理解"><span class="toc-number">7.</span> <span class="toc-text">基于概念知识图谱的短文本理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnSchema：开放中文知识图谱的普通话"><span class="toc-number">8.</span> <span class="toc-text">cnSchema：开放中文知识图谱的普通话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱在图灵机器人的落地与应用"><span class="toc-number">9.</span> <span class="toc-text">知识图谱在图灵机器人的落地与应用</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 1 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2018/03/11/first-post/" >知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</a>
+        </li>
+    
+    </div>
   </div>
-</body>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="学习笔记"><span class="iconfont-archer">&#xe606;</span>学习笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="知识图谱"><span class="iconfont-archer">&#xe606;</span>知识图谱</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'Randy Pen'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
 </html>
+
+
