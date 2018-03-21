@@ -360,11 +360,10 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf &lt;filename&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>进入<em>NEO4J_HOME</em>目录，运行命令启动数据库。</p>
-</li>
-</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/neo4j console</span><br></pre></td></tr></table></figure>
-<ol>
-<li>通过<strong>Ctrl-C</strong>来停止数据库运行。</li>
+</li>
+<li><p>通过<strong>Ctrl-C</strong>来停止数据库运行。</p>
+</li>
 </ol>
 <p>在运行Neo4j的过程中，如果遇到这种bug<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: JAVA_HOME is incorrectly defined as /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre/ (the executable /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre//bin/java does not exist)  </span><br><span class="line"></span><br><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>这是因为Neo4j依赖java内核运行<br>可以先依照<a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/" target="_blank" rel="noopener">Oracle教程安装java</a><br>然后<a href="https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users" target="_blank" rel="noopener">设置JAVA_HOME的路径</a>。  </p>
