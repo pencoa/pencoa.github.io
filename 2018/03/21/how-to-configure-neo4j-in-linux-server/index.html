@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录 · Digital World</title>
+    <title>如何在linux服务器上配置Neo4j · Digital World</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -265,7 +265,7 @@
                 <a href="/" >Digital World</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</a>
+                <a href="#" class="post-name">如何在linux服务器上配置Neo4j</a>
             </div>
     </div>
     
@@ -295,7 +295,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录
+            如何在linux服务器上配置Neo4j
             <!-- 404 -->
             
         </h1>
@@ -313,15 +313,15 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = 工程实践>工程实践</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = 知识图谱>知识图谱</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = Neo4j>Neo4j</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/11</span>
+                <span class="post-intro-time">2018/03/21</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -350,71 +350,86 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>这是一场主题为知识图谱的学术讨论会，<a href="http://www.bit.edu.cn/tzgg17/jzyg2/151075.htm" target="_blank" rel="noopener">会议通知</a>  </p>
-<h3 id="知识图谱前沿课程介绍"><a href="#知识图谱前沿课程介绍" class="headerlink" title="知识图谱前沿课程介绍"></a>知识图谱前沿课程介绍</h3><p>作为组织方的北理工大数据学习中心做开场白，介绍了这几年，北理工在大数据学习方面的努力，系列课程、讲座，同学们的自组织学习以及成果展示。<br>也预告了今年的教学安排。觉得在北理工的学习环境挺好的，有点羡慕呀。  </p>
-<h3 id="知识图谱与认知智能"><a href="#知识图谱与认知智能" class="headerlink" title="知识图谱与认知智能"></a>知识图谱与认知智能</h3><p><strong>主讲人：肖仰华@复旦大学计算机学院</strong><br>肖老师的讲解偏向背景介绍，介绍了这场讨论的主题，引入了为什么要做知识图谱的研究，穿插介绍了其他嘉宾的话题与知识图谱的关系。还介绍了复旦知识工场的工作。  </p>
+        <h2 id="在服务器上安装Neo4j"><a href="#在服务器上安装Neo4j" class="headerlink" title="在服务器上安装Neo4j"></a>在服务器上安装Neo4j</h2><p>连接服务器时没有图形界面与浏览器，需要在shell中下载与安装Neo4j.<br>在shell中使用wget下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://dist.neo4j.org/neo4j-community-$&#123;NEWVERSION&#125;-unix.tar.gz</span><br></pre></td></tr></table></figure>
+<p><em>NEWVERSION</em>是你需要下载的Neo4j版本号，版本号的列表可以从<a href="https://neo4j.com/download/other-releases/" target="_blank" rel="noopener">这个网址</a>中得到。  </p>
+<p>依照<a href="https://neo4j.com/docs/operations-manual/current/installation/linux/tarball/" target="_blank" rel="noopener">官网的指导</a>来安装Neo4j  </p>
 <blockquote>
-<p>计算智能–&gt;感知智能–&gt;认知智能</p>
+<ol>
+<li>下载安装包，在上一步当中已经完成。  </li>
+<li>使用命令解压安装包，解压的顶层目录称为。 <em>NEO4J_HOME</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; tar -xf &lt;filename&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 </blockquote>
-<p>计算智能指规则明确特定领域的数据分析优化，感知智能指类似人的视觉语音信号处理感知能力，认知智能指能够理解人的语言进行推理和解释<br>回顾最近几年人工智能发展的热潮，机器在计算智能、感知智能领域已经超越了人类。依靠大数据、运算能力带来的红利已经不再明显，这些领域的性能提升遇到天花板。<br>要进一步提升，需要给计算机提供更多常识与现实世界的知识，人们开始重新关注认知智能。而知识图谱，则是给机器提供知识的一项核心工作。<br>接下来，介绍了几个知识图谱的使用场景。包含：搜索、推荐、解释、自然人机交互、深层关系发现、推理。<br>其中一个是智能推荐，通过构建场景的知识图谱，可以对场景进行任务的感知。<br>比如说，当一个用户在搜索九寨沟的时候，可以向用户推荐登山用具。背后有基于知识图谱的逻辑推理：  </p>
 <blockquote>
-<p>九寨沟–&gt;山区–&gt;登山–&gt;登山用具</p>
+<ol>
+<li>进入<em>NEO4J_HOME</em>目录，运行命令启动数据库。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ./bin/neo4j console</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>通过这种方式，可以从基于行为的推荐发展到行为与语义结合的推荐。  </p>
-<p>回顾了过去的知识工程，曾经在7080年代火热，但是并没能对工业界产生足够大的影响。因为当时主要由专家手工编辑，规模小，达不到应用需求。而现在互联网的发展与自然语言处理技术的进步，使得有可能构造大规模的知识图谱，引导知识工程的复兴。  </p>
 <blockquote>
-<p>Small Knowledge + big data = big Knowledge</p>
+<ol>
+<li>通过<strong>Ctrl-C</strong>来停止数据库运行。</li>
+</ol>
 </blockquote>
-<p>在互联网时代，用户需求多样，范围广，对精度的要求不高，开放域的知识图谱也可以满足需求。<br>同时，在跟工业界的交流中，发现很多领域原本想做垂直领域的知识图谱，后来发现在构造的过程中知识的边界很容易被突破，变成需要通用的知识。<br>在以上环节的介绍中，分别对应了知识工程的CN-DBpedia和CN-Probase等项目。<a href="kw.fudan.edu.cn/about/">知识工场</a><br>最后对未来的展望：  </p>
+<p>在运行Neo4j的过程中，如果遇到这种bug<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: JAVA_HOME is incorrectly defined as /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre/ (the executable /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre//bin/java does not exist)  </span><br><span class="line"></span><br><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>这是因为Neo4j依赖java内核运行<br>可以先依照<a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/" target="_blank" rel="noopener">Oracle教程安装java</a><br>然后<a href="https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users" target="_blank" rel="noopener">设置JAVA_HOME的路径</a>。  </p>
 <blockquote>
-<p>NLP + KB = NLU</p>
+<ol>
+<li>寻找openjdk的路径  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; find /usr/lib/jvm/java-1.x.x-openjdk</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 </blockquote>
-<h3 id="Event-Extraction-From-Texts"><a href="#Event-Extraction-From-Texts" class="headerlink" title="Event Extraction From Texts"></a>Event Extraction From Texts</h3><p><strong>主讲人：刘康@中科院自动化所</strong><br>这是我特别关注的一个主题，主讲人分享了他们在金融事件抽取的工作，以及当中的一些技巧。<br>以往，知识抽取通常是实体、关系的抽取。在构建以事件为中心的知识图谱时，无论是格式还是步骤都会有所不同。<br>在事件为主的知识图谱中，每种事件会有不同的事件帧结构，比如地震事件会有日期、强度、深度、伤亡人数、地震中心等。<br>基于事件知识图谱，可以进行关系描述，因果时序分析。  </p>
-<p>对事件进行定义，涉及到参与者的特殊事情发生了。<br>在抽取事件当中，会涉及事件的触发词、事件类型、事件变量以及变量的类型。  </p>
-<p>抽取事件的步骤是：  </p>
-<ul>
-<li>事件识别</li>
-<li>事件类型的识别</li>
-<li>寻找事件相关变量</li>
-<li>事件变量的类型识别</li>
-</ul>
-<p>跟关系抽取比起来，事件抽取中往往没有具体的名词短语来直接表示事件。因此需要寻找事件的触发词，这个触发词通常为动词短语。<br>比如，在一个 Personnel End-Position 的事件当中，触发词是 quit 而不是 end-position.<br>e.g Barry Diller on Wednesday quit as chief of Vivendi Universal Entertainment.  </p>
-<p>关系抽取是发现两个所给实体之间的关系；事件抽取是发现一个事件和实体之间的关系。<br>用图片演示事件抽取的工作流程。  </p>
-<p>接着分享了一些 tricky 的工作，如何做回标得到大量训练语料。<br>人工标注数据的成本较高，因此使用已有的结构化数据去回标新的语料去训练，能够识别更多新的模式。<br>在关系抽取当中，会把关系的主体、客体和语料进行对比，发现一个句子中同时包含主体、客体时进行回标，这样能产生更多训练数据，不过也会引入噪声。<br>在事件抽取中，这种方法not work. 事件的图结构与关系的图结构不一样。在事件的图谱中，先识别出重要的变量，当这些重要的变量存在的时候，事件发生的概率就高了。比如，在结婚的事件当中，新郎跟新娘是重要变量，时间不是重要变量。当一个句子中存在事件的重要变量时，进行回标，然后训练，得到抽取器来识别 trigger word. 得到 trigger word 后跟外部数据源对比进行增删，然后再用 trigger word 进行再次回标，得到更多数据。  </p>
-<p>他们组用这种方法，从公告、新闻当中去抽取金融事件。  </p>
-<p>他们在自己的工作当中使用了神经网络的方法，并且使用了多种池化，能够提升性能。  </p>
-<p><a href="https://www.ldc.upenn.edu" target="_blank" rel="noopener">语料数据来源LDC</a></p>
-<h3 id="知识图谱与智能问答"><a href="#知识图谱与智能问答" class="headerlink" title="知识图谱与智能问答"></a>知识图谱与智能问答</h3><p><strong>主讲人：赵洲@浙江大学</strong><br>剩余时间不多，语速飞快，ppt翻页像风一样自由。<br>内容偏概论，介绍了一些垂直领域的问答机器人应用，包含医疗、教育、金融、法律等方向。<br>介绍了基于知识库、上下文以及注意力模型去构建聊天机器人的方案。  </p>
-<hr>
-<p>上午偏学术界，下午偏工业界的分割线</p>
-<hr>
-<h3 id="From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference"><a href="#From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference" class="headerlink" title="From Large Scale Graph Analytics To Knowledge Graph Inference"></a>From Large Scale Graph Analytics To Knowledge Graph Inference</h3><p><strong>主讲人：夏应龙@华为</strong><br>这个主题偏向于知识图谱的系统与基础设施。<br>知识图谱的规模从小到大的时候，性能会在中间规模时有所下降。在小机器中存储知识图谱，性能很好，但是不能承载大规模的知识图谱，不幸的是，工业级的KG往往比较大，需要在多个主机中运行。尝试使用各种开源项目构建，发现相互之间割离，导致性能下降。从操作系统的角度进行了性能分析。<br>为此，华为研发了一套工业级的知识图谱系统Eywa，进行了介绍。  </p>
-<h3 id="当知识图谱遇见个性化推荐"><a href="#当知识图谱遇见个性化推荐" class="headerlink" title="当知识图谱遇见个性化推荐"></a>当知识图谱遇见个性化推荐</h3><p><strong>主讲人：张富峥@MSRA</strong><br>开头回顾了推荐系统的发展。<br>在进行推荐的时候，如果能够有可解释性，更能让用户接受。<br>之前在做美妆的时候发现，比起那些直接提供方案的，对用户的脸型特征进行分析，结合一套美学理论去分析然后再提供方案的造型师会有更多的粉丝。<br>而知识图谱的参与，能够给推荐系统带来更多的可解释性。<br>比如，在推荐电影的时候，可以根据用户喜欢的电影去推荐同一个导演或者同一个主演的电影。但是，这个跟Netflix的细粒度标签推荐推荐有什么差异呢？<br>比较好的效果是在新闻推荐领域，他们基于微软的Probase的部分子图，构建了知识图谱。通过知识图谱的路径关系进行推荐。比如，用户在对特朗普的新闻感兴趣时，也可能会对政治、以色列等话题感兴趣。这种路径的方式更符合用户的认知。在实验过程中，他们发现用户兴趣点在知识图谱中存在一个涟漪效应。跟原有兴趣点路径关系短的话题或存在多条路径连接的话题，用户会更感兴趣。<br>此处应该有图示<br>在实验中，他们对知识图谱的路径关系进行了embedding，加入到神经网络中，与用户标签、内容标签等共同训练，并对比了多种训练方式的效果。  </p>
-<p>Ref:</p>
-<ul>
-<li>Knowledge Graph Embedding</li>
-<li>Deep Knowledge - Aware Network (DKN)</li>
-<li>Collaborative Knowledge base Embedding (CKE)</li>
-<li>Ripple Network</li>
-<li>Multi-task learning for Knowledge graph enhanced Recommendation (MKR)</li>
-</ul>
-<h3 id="基于概念知识图谱的短文本理解"><a href="#基于概念知识图谱的短文本理解" class="headerlink" title="基于概念知识图谱的短文本理解"></a>基于概念知识图谱的短文本理解</h3><p><strong>主讲人：王仲远@美团点评</strong><br>介绍了他之前在微软亚研院的工作，结合概念知识图谱去理解短文本。微软构建了一套概念知识图谱Probase.<br>在遇到一个多义词时，先将该词语在概念上定位到一个 basic level, 不能太宽泛，也不能太窄以至于没有共性。比如微软的概念是 software company , 而不是 company or largest OS service company.<br>在文本中遇到这个词的时候，结合上下文进行推断，应该属于哪个概念。<br>比如， python 同时有编程语言与蟒蛇两套概念，在 python tutorial 中，编程语言更常与教程连接，因此更可能是指编程语言；在 horrible python 中，蛇类有可怕的特点，因此更可能指代蟒蛇。<br>结尾是广告时间：美团点评拥有大量数据，欢迎大家进行合作研究，省下许多爬虫的精力。嗯，有数据的都是大佬。  </p>
-<h3 id="cnSchema：开放中文知识图谱的普通话"><a href="#cnSchema：开放中文知识图谱的普通话" class="headerlink" title="cnSchema：开放中文知识图谱的普通话"></a>cnSchema：开放中文知识图谱的普通话</h3><p><strong>主讲人：丁力@海知智能</strong><br>回顾了知识图谱的发展，指出cnSchema的意义。呼吁大家参与到cnSchema的构建当中来。<br>使用同一套标准能够有助于不同数据源的合并。原本并没有引起工业界重视，随着搜索引擎对schema进行优化，也被越来越多的厂商接受。<br>广告时间：欢迎加入海知智能，欢迎共同构建cnSchema.  </p>
-<h3 id="知识图谱在图灵机器人的落地与应用"><a href="#知识图谱在图灵机器人的落地与应用" class="headerlink" title="知识图谱在图灵机器人的落地与应用"></a>知识图谱在图灵机器人的落地与应用</h3><p><strong>主讲人：魏晨@图灵机器人</strong><br>开头用视频演示了图灵机器人的效果。<br>接着讲了知识图谱如何应用在图灵机器人中。<br>比如，用户生活习惯的图谱，情景处理的图谱。<br>因为是做产品，所以有更多的数据分析，从用户数据判断哪些功能因为常用而重要，哪些功能因为少用而可以使用简单方案处理。<br>广告时间：欢迎加入图灵机器人。  </p>
-<p>会议的PPT尚未发布，因此使用文字简短记录。</p>
+<blockquote>
+<ol>
+<li>修改配置，可能需要sudo权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; vim /etc/profile</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol>
+<li>通过 i 进入写入模式</li>
+<li>增加设置到文件中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; export JAVA_HOME=&quot;path that you found&quot;</span><br><span class="line">&gt; export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol>
+<li>重新打开shell或者使用配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; source /etc/profile</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h2 id="配置conf"><a href="#配置conf" class="headerlink" title="配置conf"></a>配置conf</h2><p>通常会使用个人笔记本的浏览器来连接服务器上的Neo4j数据库，因为浏览器上提供了图形化交互界面，这对展示图结构很有帮助。  </p>
+<p>在连接之前，需要编辑Neo4j的配置文件。<br>文件的目录位于 /neo4j-community/conf/neo4j.conf</p>
+<p>通过编辑器对neo4j.conf进行编辑，先寻找<em>Network connector configuration</em>部分，这部分是跟远程网络连接相关的配置内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#*****************************************************************</span><br><span class="line"># Network connector configuration</span><br><span class="line">#*****************************************************************</span><br></pre></td></tr></table></figure></p>
+<p>在这部分配置中，将以下配置的注释去掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
+<p>将以下配置注释去掉，并且修改为对应值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbms.connector.bolt.listen_address=0.0.0.0:7687</span><br><span class="line">dbms.connector.http.listen_address=0.0.0.0:7474</span><br><span class="line">dbms.connector.https.listen_address=0.0.0.0:7473</span><br></pre></td></tr></table></figure></p>
+<p>完成后，回到 neo4j 根目录重新启动数据库即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/neo4j restart</span><br></pre></td></tr></table></figure></p>
+<p>此时可以在个人电脑的浏览器上打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&#123;your ip address&#125;:7474/browser/</span><br></pre></td></tr></table></figure></p>
+<p>进入Neo4j图形界面</p>
+<h2 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h2><p>如果在完成以上环节后，依然无法通过浏览器远程连接数据库，有可能是服务器上防火墙的问题。<br>需要sudo权限来配置服务器的防火墙。    </p>
+<p>查看该地址是否可以被访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet &#123;your ip address&#125; 7474</span><br></pre></td></tr></table></figure></p>
+<p>配置防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status iptables</span><br></pre></td></tr></table></figure>
+<p>显示已有规则，可以配合 grep 查看具体端口情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure></p>
+<p>单个添加端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>误添加删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br></pre></td></tr></table></figure></p>
+<h2 id="初始修改密码"><a href="#初始修改密码" class="headerlink" title="初始修改密码"></a>初始修改密码</h2><p>完成以上环节后，可以通过浏览器远程连接Neo4j数据库。第一次登陆时会提示修改密码。初始的用户名是neo4j，初始密码是neo4j.</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/21/how-to-configure-neo4j-in-linux-server/" title= 如何在linux服务器上配置Neo4j >
-                    <div class="nextTitle">如何在linux服务器上配置Neo4j</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/11/first-post/" title= 知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录 >
+                    <div class="prevTitle">知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</div>
+                </a>
             
         </li>
     </ul>
@@ -510,7 +525,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱前沿课程介绍"><span class="toc-number">1.</span> <span class="toc-text">知识图谱前沿课程介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱与认知智能"><span class="toc-number">2.</span> <span class="toc-text">知识图谱与认知智能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Extraction-From-Texts"><span class="toc-number">3.</span> <span class="toc-text">Event Extraction From Texts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱与智能问答"><span class="toc-number">4.</span> <span class="toc-text">知识图谱与智能问答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#From-Large-Scale-Graph-Analytics-To-Knowledge-Graph-Inference"><span class="toc-number">5.</span> <span class="toc-text">From Large Scale Graph Analytics To Knowledge Graph Inference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#当知识图谱遇见个性化推荐"><span class="toc-number">6.</span> <span class="toc-text">当知识图谱遇见个性化推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于概念知识图谱的短文本理解"><span class="toc-number">7.</span> <span class="toc-text">基于概念知识图谱的短文本理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cnSchema：开放中文知识图谱的普通话"><span class="toc-number">8.</span> <span class="toc-text">cnSchema：开放中文知识图谱的普通话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#知识图谱在图灵机器人的落地与应用"><span class="toc-number">9.</span> <span class="toc-text">知识图谱在图灵机器人的落地与应用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在服务器上安装Neo4j"><span class="toc-number">1.</span> <span class="toc-text">在服务器上安装Neo4j</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">2.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置防火墙"><span class="toc-number">3.</span> <span class="toc-text">设置防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始修改密码"><span class="toc-number">4.</span> <span class="toc-text">初始修改密码</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
