@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>如何在linux服务器上配置Neo4j · Digital World</title>
+    <title>理解 word embedding · Digital World</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -265,7 +265,7 @@
                 <a href="/" >Digital World</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">如何在linux服务器上配置Neo4j</a>
+                <a href="#" class="post-name">理解 word embedding</a>
             </div>
     </div>
     
@@ -295,7 +295,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            如何在linux服务器上配置Neo4j
+            理解 word embedding
             <!-- 404 -->
             
         </h1>
@@ -313,15 +313,15 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = 工程实践>工程实践</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = Neo4j>Neo4j</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/21</span>
+                <span class="post-intro-time">2018/03/28</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -350,74 +350,40 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="在服务器上安装Neo4j"><a href="#在服务器上安装Neo4j" class="headerlink" title="在服务器上安装Neo4j"></a>在服务器上安装Neo4j</h2><p>连接服务器时没有图形界面与浏览器，需要在shell中下载与安装Neo4j.<br>在shell中使用wget下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://dist.neo4j.org/neo4j-community-$&#123;NEWVERSION&#125;-unix.tar.gz</span><br></pre></td></tr></table></figure>
-<p><em>NEWVERSION</em>是你需要下载的Neo4j版本号，版本号的列表可以从<a href="https://neo4j.com/download/other-releases/" target="_blank" rel="noopener">这个网址</a>中得到。  </p>
-<p>依照<a href="https://neo4j.com/docs/operations-manual/current/installation/linux/tarball/" target="_blank" rel="noopener">官网的指导</a>来安装Neo4j  </p>
+        <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>在自然语言处理中，需要对词语进行表示。在语料当中，词典通常都是非常大的，如果使用 one-hot 的格式来表示，会有巨大的维度，显得稀疏，并且词语之间的关系并没有表示出来。<br>这时候，会使用一个低维度(通常是300维度)的矩阵来表达词典，通过查询的方式得到某个词语的向量来表示这个词语。<br><img src="/images/word_embedding.png" alt="word_embedding"><br>上图表格中包含一个矩阵E，每个词语的词向量可以通过该词语的id编号，比如Apple(456)，查询该矩阵当中456列的向量 [0.00, -0.01, 0.03, 0.95] 即为该词语的词向量，低频不在词典当中的词语被认为是Unkown.  </p>
+<p>这种方式有几个优点：</p>
 <ol>
-<li>下载安装包，在上一步当中已经完成。  </li>
-<li><p>使用命令解压安装包，解压的顶层目录称为。 <em>NEO4J_HOME</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入<em>NEO4J_HOME</em>目录，运行命令启动数据库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/neo4j console</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过<strong>Ctrl-C</strong>来停止数据库运行。</p>
-</li>
+<li>降低了词语的维度，提高运算效率；</li>
+<li>词语之间的向量具有相互关系，可以用于关系推理；</li>
+<li>有更好的泛化效果。</li>
 </ol>
-<p>在运行Neo4j的过程中，如果遇到这种bug<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: JAVA_HOME is incorrectly defined as /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre/ (the executable /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre//bin/java does not exist)  </span><br><span class="line"></span><br><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64</span><br></pre></td></tr></table></figure></p>
-<p>这是因为Neo4j依赖java内核运行<br>可以先依照<a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/" target="_blank" rel="noopener">Oracle教程安装java</a><br>然后<a href="https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users" target="_blank" rel="noopener">设置JAVA_HOME的路径</a>。  </p>
-<ol>
-<li><p>寻找openjdk的路径  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /usr/lib/jvm/java-1.x.x-openjdk</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置，可能需要sudo权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过 i 进入写入模式</p>
-</li>
-<li><p>增加设置到文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=&quot;path that you found&quot;</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新打开shell或者使用配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="配置conf"><a href="#配置conf" class="headerlink" title="配置conf"></a>配置conf</h2><p>通常会使用个人笔记本的浏览器来连接服务器上的Neo4j数据库，因为浏览器上提供了图形化交互界面，这对展示图结构很有帮助。  </p>
-<p>在连接之前，需要编辑Neo4j的配置文件。<br>文件的目录位于 /neo4j-community/conf/neo4j.conf</p>
-<p>通过编辑器对neo4j.conf进行编辑，先寻找<em>Network connector configuration</em>部分，这部分是跟远程网络连接相关的配置内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#*****************************************************************</span><br><span class="line"># Network connector configuration</span><br><span class="line">#*****************************************************************</span><br></pre></td></tr></table></figure></p>
-<p>在这部分配置中，将以下配置的注释去掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>将以下配置注释去掉，并且修改为对应值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbms.connector.bolt.listen_address=0.0.0.0:7687</span><br><span class="line">dbms.connector.http.listen_address=0.0.0.0:7474</span><br><span class="line">dbms.connector.https.listen_address=0.0.0.0:7473</span><br></pre></td></tr></table></figure></p>
-<p>完成后，回到 neo4j 根目录重新启动数据库即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/neo4j restart</span><br></pre></td></tr></table></figure></p>
-<p>此时可以在个人电脑的浏览器上打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&#123;your ip address&#125;:7474/browser/</span><br></pre></td></tr></table></figure></p>
-<p>进入Neo4j图形界面</p>
-<h2 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h2><p>如果在完成以上环节后，依然无法通过浏览器远程连接数据库，有可能是服务器上防火墙的问题。<br>需要sudo权限来配置服务器的防火墙。    </p>
-<p>查看该地址是否可以被访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet &#123;your ip address&#125; 7474</span><br></pre></td></tr></table></figure></p>
-<p>配置防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status iptables</span><br></pre></td></tr></table></figure>
-<p>显示已有规则，可以配合 grep 查看具体端口情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure></p>
-<p>单个添加端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>误添加删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br></pre></td></tr></table></figure></p>
-<h2 id="初始修改密码"><a href="#初始修改密码" class="headerlink" title="初始修改密码"></a>初始修改密码</h2><p>完成以上环节后，可以通过浏览器远程连接Neo4j数据库。第一次登陆时会提示修改密码。初始的用户名是neo4j，初始密码是neo4j.</p>
+<p>word embedding 就是从语料库当中进行非监督学习，得到词典的表达矩阵E的过程。  </p>
+<h3 id="物理直觉"><a href="#物理直觉" class="headerlink" title="物理直觉"></a>物理直觉</h3><p>为什么 word embedding 可以达到这些效果呢。<br>这里有一个假设，在自然语言当中，词语用来表达脑海里的概念，这个概念具有什么样的属性也往往会被包含在词语所在的语言序列当中。比如：   </p>
+<blockquote>
+<p>马约翰跑完步后喜欢喝水。<br>马约翰跑完步后喜欢喝柠檬茶。  </p>
+</blockquote>
+<p>这两个句子可能就包含有水和柠檬茶都属于液体、能够解渴等属性。<br>那么，如果我们把语料库当中的词语与它们的上下文语言序列统计起来，就有可能学习到词语所具有的属性。<br>在大量的语料库中训练学习得到的词向量包含更多属性的信息，方便与属性相近的词向量替换，因此也有了更好的泛化效果。  </p>
+<h3 id="实现算法"><a href="#实现算法" class="headerlink" title="实现算法"></a>实现算法</h3><p>在语料库中统计词语生成词典，每个词语作为目标词向量，在语料中对该目标词向量的上下文语言序列采用不同的采样方式得到输入词向量，把输入词向量与目标词向量分别放置到神经网络的 input layer 与 output layer 当中，定义好损失函数进行训练。这个过程可以逐步训练与优化输入词向量与目标词向量。而输入词向量与目标词向量都是词典矩阵E的组成部分，多次重复后即可学习到词典矩阵。<br>跟上面图表所示不同，这是一个机器非监督学习词语特征的过程，因为坐标系初始随机化，坐标转换，维度变化等原因，word embedding 学习到的词向量属性并不一定是人们脑海里认知的属性，还不需要理解每个属性维度的含义。  </p>
+<h4 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h4><p>有CBOW和skip-gram两种类型，分别是使用目标词语的前四个词语、前后各四个词语、前一个词语、附近随机一个词语作为输入词向量。使用softmax作为输出层的判别函数进行训练。  </p>
+<h4 id="GloVe"><a href="#GloVe" class="headerlink" title="GloVe"></a>GloVe</h4><p><img src="/images/glove.jpg" alt="glove"><br>统计了目标词语上下10个位置的词语，统计两两共同出现的频率。</p>
+<h4 id="fastText"><a href="#fastText" class="headerlink" title="fastText"></a>fastText</h4><p>facebook出的算法，有大量预训练的语料。<a href="https://github.com/facebookresearch/fastText" target="_blank" rel="noopener">项目地址</a></p>
+<h3 id="中文预训练语料"><a href="#中文预训练语料" class="headerlink" title="中文预训练语料"></a>中文预训练语料</h3><p>在工程项目中，不一定需要自己训练词向量，也可以使用其他人训练好的语料。  </p>
+<ul>
+<li>由韩国人 Kyubyong Park 预训练的<a href="https://github.com/Kyubyong/wordvectors" target="_blank" rel="noopener">词向量语料</a>，语言种类很多，缺点是没有区分简体中文与繁体中文。  </li>
+<li>由 FaceBook 训练的<a href="https://github.com/facebookresearch/fastText/blob/master/docs/crawl-vectors.md" target="_blank" rel="noopener">词向量语料</a>，除了维基百科，还使用了爬虫得到的语料。</li>
+</ul>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/28/word-embedding/" title= 理解 word embedding >
-                    <div class="nextTitle">理解 word embedding</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/03/11/first-post/" title= 知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录 >
-                    <div class="prevTitle">知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</div>
+                <a href= "/2018/03/21/how-to-configure-neo4j-in-linux-server/" title= 如何在linux服务器上配置Neo4j >
+                    <div class="prevTitle">如何在linux服务器上配置Neo4j</div>
                 </a>
             
         </li>
@@ -514,7 +480,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在服务器上安装Neo4j"><span class="toc-number">1.</span> <span class="toc-text">在服务器上安装Neo4j</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">2.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置防火墙"><span class="toc-number">3.</span> <span class="toc-text">设置防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始修改密码"><span class="toc-number">4.</span> <span class="toc-text">初始修改密码</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#物理直觉"><span class="toc-number">2.</span> <span class="toc-text">物理直觉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现算法"><span class="toc-number">3.</span> <span class="toc-text">实现算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#word2vec"><span class="toc-number">3.1.</span> <span class="toc-text">word2vec</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GloVe"><span class="toc-number">3.2.</span> <span class="toc-text">GloVe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fastText"><span class="toc-number">3.3.</span> <span class="toc-text">fastText</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中文预训练语料"><span class="toc-number">4.</span> <span class="toc-text">中文预训练语料</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

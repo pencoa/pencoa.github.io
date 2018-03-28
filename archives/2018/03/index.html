@@ -299,6 +299,38 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/28/word-embedding/" >
+                
+                    <span>理解 word embedding</span>
+            </a>
+            <div class="abstract-content">
+                使用场景在自然语言处理中，需要对词语进行表示。在语料当中，词典通常都是非常大的，如果使用 one-hot 的格式来表示，会有巨大的维度，显得稀疏，并且词语之间的关系并没有表示出来。这时候，会使用一个低维度(通常是300维度)的矩阵来表达词典，通过查询的方式得到某个词语的向量来表示这个词语。上图表格中包含一个矩阵E，每个词语的词向量可以通过该词语的id编号，比如Apple(456)，查询该矩阵当中456列的向量 [0.00, -0.01, 0.03, 0.95] 即为该词语的词向量，低频不在词典当中的词语被认为是Unkown.  
+这种方式有几个优点：
+
+降低了词语的维度，提高运算效率；
+...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/28</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/03/21/how-to-configure-neo4j-in-linux-server/" >
                 
                     <span>如何在linux服务器上配置Neo4j</span>
@@ -463,7 +495,16 @@ NEWVERSION是你需要下载的Neo4j版本号，版本号的列表可以从这�
     
     
     
-    <div class="total-archive"> Total : 2 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 3 </div>
     
     <div class="post-archive">
     
@@ -472,6 +513,11 @@ NEWVERSION是你需要下载的Neo4j版本号，版本号的列表可以从这�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/28</span><a class="archive-post-title" href= "/2018/03/28/word-embedding/" >理解 word embedding</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -489,6 +535,8 @@ NEWVERSION是你需要下载的Neo4j版本号，版本号的列表可以从这�
     <div class="sidebar-tags-name">
     
         <span class="sidebar-tag-name" data-tags="学习笔记"><span class="iconfont-archer">&#xe606;</span>学习笔记</span>
+    
+        <span class="sidebar-tag-name" data-tags="nlp"><span class="iconfont-archer">&#xe606;</span>nlp</span>
     
         <span class="sidebar-tag-name" data-tags="知识图谱"><span class="iconfont-archer">&#xe606;</span>知识图谱</span>
     

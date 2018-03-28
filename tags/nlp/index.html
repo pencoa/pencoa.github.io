@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>如何在linux服务器上配置Neo4j · Digital World</title>
+    <title>Digital World</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -251,23 +251,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Digital World</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">如何在linux服务器上配置Neo4j</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Digital World</a>
 </header>
@@ -279,162 +268,68 @@
 
 
 
-height:50vh;
+
 
 >
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            如何在linux服务器上配置Neo4j
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = 工程实践>工程实践</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = Neo4j>Neo4j</a>
-    
-</div>
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/21</span>
-                
-                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                    <span class="iconfont-archer">&#xe602;</span>
-                    <span id="busuanzi_value_page_pv"></span>
-                </span>
-                
-                <span class="shareWrapper">
-                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                    <span class="shareText">Share</span>
-                    <ul class="shareList">
-                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                            <div class="share-qrcode"></div>
-                        </li>
-                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                    </ul>
-                </span>
-            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h2 id="在服务器上安装Neo4j"><a href="#在服务器上安装Neo4j" class="headerlink" title="在服务器上安装Neo4j"></a>在服务器上安装Neo4j</h2><p>连接服务器时没有图形界面与浏览器，需要在shell中下载与安装Neo4j.<br>在shell中使用wget下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://dist.neo4j.org/neo4j-community-$&#123;NEWVERSION&#125;-unix.tar.gz</span><br></pre></td></tr></table></figure>
-<p><em>NEWVERSION</em>是你需要下载的Neo4j版本号，版本号的列表可以从<a href="https://neo4j.com/download/other-releases/" target="_blank" rel="noopener">这个网址</a>中得到。  </p>
-<p>依照<a href="https://neo4j.com/docs/operations-manual/current/installation/linux/tarball/" target="_blank" rel="noopener">官网的指导</a>来安装Neo4j  </p>
-<ol>
-<li>下载安装包，在上一步当中已经完成。  </li>
-<li><p>使用命令解压安装包，解压的顶层目录称为。 <em>NEO4J_HOME</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入<em>NEO4J_HOME</em>目录，运行命令启动数据库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/neo4j console</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过<strong>Ctrl-C</strong>来停止数据库运行。</p>
-</li>
-</ol>
-<p>在运行Neo4j的过程中，如果遇到这种bug<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: JAVA_HOME is incorrectly defined as /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre/ (the executable /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre//bin/java does not exist)  </span><br><span class="line"></span><br><span class="line">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64</span><br></pre></td></tr></table></figure></p>
-<p>这是因为Neo4j依赖java内核运行<br>可以先依照<a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/" target="_blank" rel="noopener">Oracle教程安装java</a><br>然后<a href="https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users" target="_blank" rel="noopener">设置JAVA_HOME的路径</a>。  </p>
-<ol>
-<li><p>寻找openjdk的路径  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /usr/lib/jvm/java-1.x.x-openjdk</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置，可能需要sudo权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过 i 进入写入模式</p>
-</li>
-<li><p>增加设置到文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=&quot;path that you found&quot;</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新打开shell或者使用配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="配置conf"><a href="#配置conf" class="headerlink" title="配置conf"></a>配置conf</h2><p>通常会使用个人笔记本的浏览器来连接服务器上的Neo4j数据库，因为浏览器上提供了图形化交互界面，这对展示图结构很有帮助。  </p>
-<p>在连接之前，需要编辑Neo4j的配置文件。<br>文件的目录位于 /neo4j-community/conf/neo4j.conf</p>
-<p>通过编辑器对neo4j.conf进行编辑，先寻找<em>Network connector configuration</em>部分，这部分是跟远程网络连接相关的配置内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#*****************************************************************</span><br><span class="line"># Network connector configuration</span><br><span class="line">#*****************************************************************</span><br></pre></td></tr></table></figure></p>
-<p>在这部分配置中，将以下配置的注释去掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbms.connectors.default_listen_address=0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>将以下配置注释去掉，并且修改为对应值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dbms.connector.bolt.listen_address=0.0.0.0:7687</span><br><span class="line">dbms.connector.http.listen_address=0.0.0.0:7474</span><br><span class="line">dbms.connector.https.listen_address=0.0.0.0:7473</span><br></pre></td></tr></table></figure></p>
-<p>完成后，回到 neo4j 根目录重新启动数据库即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/neo4j restart</span><br></pre></td></tr></table></figure></p>
-<p>此时可以在个人电脑的浏览器上打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&#123;your ip address&#125;:7474/browser/</span><br></pre></td></tr></table></figure></p>
-<p>进入Neo4j图形界面</p>
-<h2 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h2><p>如果在完成以上环节后，依然无法通过浏览器远程连接数据库，有可能是服务器上防火墙的问题。<br>需要sudo权限来配置服务器的防火墙。    </p>
-<p>查看该地址是否可以被访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet &#123;your ip address&#125; 7474</span><br></pre></td></tr></table></figure></p>
-<p>配置防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status iptables</span><br></pre></td></tr></table></figure>
-<p>显示已有规则，可以配合 grep 查看具体端口情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure></p>
-<p>单个添加端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>误添加删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT -p tcp --dport 7474 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br></pre></td></tr></table></figure></p>
-<h2 id="初始修改密码"><a href="#初始修改密码" class="headerlink" title="初始修改密码"></a>初始修改密码</h2><p>完成以上环节后，可以通过浏览器远程连接Neo4j数据库。第一次登陆时会提示修改密码。初始的用户名是neo4j，初始密码是neo4j.</p>
-
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/28/word-embedding/" title= 理解 word embedding >
-                    <div class="nextTitle">理解 word embedding</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/03/11/first-post/" title= 知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录 >
-                    <div class="prevTitle">知识图谱前沿技术课程暨学术研讨会(北理工站 2018-03-10)会议记录</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
+            <main class="main index-page">
     
     
-    <!--PC版-->
-
-    <!--PC版-->
-
-
     
-    <!-- 评论 -->
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/28/word-embedding/" >
+                
+                    <span>理解 word embedding</span>
+            </a>
+            <div class="abstract-content">
+                使用场景在自然语言处理中，需要对词语进行表示。在语料当中，词典通常都是非常大的，如果使用 one-hot 的格式来表示，会有巨大的维度，显得稀疏，并且词语之间的关系并没有表示出来。这时候，会使用一个低维度(通常是300维度)的矩阵来表达词典，通过查询的方式得到某个词语的向量来表示这个词语。上图表格中包含一个矩阵E，每个词语的词向量可以通过该词语的id编号，比如Apple(456)，查询该矩阵当中456列的向量 [0.00, -0.01, 0.03, 0.95] 即为该词语的词向量，低频不在词典当中的词语被认为是Unkown.  
+这种方式有几个优点：
+
+降低了词语的维度，提高运算效率；
+...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/28</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
 </main>
             <!-- profile -->
             
@@ -500,22 +395,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在服务器上安装Neo4j"><span class="toc-number">1.</span> <span class="toc-text">在服务器上安装Neo4j</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">2.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置防火墙"><span class="toc-number">3.</span> <span class="toc-text">设置防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始修改密码"><span class="toc-number">4.</span> <span class="toc-text">初始修改密码</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -647,8 +526,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
