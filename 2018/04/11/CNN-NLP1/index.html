@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>Digital World</title>
+    <title>CNN在自然语言处理当中的应用-1 · Digital World</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -251,12 +251,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Digital World</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">CNN在自然语言处理当中的应用-1</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Digital World</a>
 </header>
@@ -268,96 +279,111 @@
 
 
 
-
+height:50vh;
 
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            CNN在自然语言处理当中的应用-1
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/11</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/04/11/CNN-NLP1/" >
-                
-                    <span>CNN在自然语言处理当中的应用-1</span>
-            </a>
-            <div class="abstract-content">
-                CNN通常是用于图像处理，因为CNN的结构与图像处理领域的卷积核很相似，在处理二维的图像数据时可以有效提取图像特征。为什么也可以用到自然语言处理当中呢？自然语言处理当中，有n-gram模型，用于统计某几个连续的词语序列出现的概率。当观察到前几个单词依次出现时，可以返回在训练语料库中接着出现最多，概率最大的单词。这里的n表示连续的单词数量，通常取2到4个，更多的训练起来就很稀疏了。如果我们使用一维的卷积核对词语序列进行训练，也可以类似的捕捉到词语序列的特征。比如：狼来了，分别用2, 1, 3的实数向量表示狼，来，了。当卷积核m是[1, 2, 3]的时候就比[-3, -2, 1]与词向量相乘...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/11</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/28/word-embedding/" >
-                
-                    <span>理解 word embedding</span>
-            </a>
-            <div class="abstract-content">
-                使用场景在自然语言处理中，需要对词语进行表示。在语料当中，词典通常都是非常大的，如果使用 one-hot 的格式来表示，会有巨大的维度，显得稀疏，并且词语之间的关系并没有表示出来。这时候，会使用一个低维度(通常是300维度)的矩阵来表达词典，通过查询的方式得到某个词语的向量来表示这个词语。上图表格中包含一个矩阵E，每个词语的词向量可以通过该词语的id编号，比如Apple(456)，查询该矩阵当中456列的向量 [0.00, -0.01, 0.03, 0.95] 即为该词语的词向量，低频不在词典当中的词语被认为是Unkown.  
-这种方式有几个优点：
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>CNN通常是用于图像处理，因为CNN的结构与图像处理领域的卷积核很相似，在处理二维的图像数据时可以有效提取图像特征。为什么也可以用到自然语言处理当中呢？<br>自然语言处理当中，有n-gram模型，用于统计某几个连续的词语序列出现的概率。当观察到前几个单词依次出现时，可以返回在训练语料库中接着出现最多，概率最大的单词。这里的n表示连续的单词数量，通常取2到4个，更多的训练起来就很稀疏了。<br>如果我们使用一维的卷积核对词语序列进行训练，也可以类似的捕捉到词语序列的特征。比如：狼来了，分别用2, 1, 3的实数向量表示狼，来，了。当卷积核m是[1, 2, 3]的时候就比[-3, -2, 1]与词向量相乘得到更高的分数。<br>一个句子依次包含词语，形成一个向量。当把m与句子进行卷积的时候，可以提取是否含有该卷机核所包含的语言特征。<br>这里还是一维的情况，会有无法用实数一一表示词语，因为词语的数量太庞大了。在神经网络模型当中，通常会使用word embedding对词语进行表示。一个单词也会被用一个向量来表示。这时，句子中的单词依次使用词向量表示，一个句子就扩展成一个二维向量。对应的，卷机核要对词向量进行处理，也进行了扩展。<br>也就成为跟图像卷积相类似的处理形式。</p>
+<p>Ref:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1404.2188" target="_blank" rel="noopener">A Convolutional Neural Network for Modelling Sentences</a></li>
+</ul>
 
-降低了词语的维度，提高运算效率；
-...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/28</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/28/word-embedding/" title= 理解 word embedding >
+                    <div class="prevTitle">理解 word embedding</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = 学习笔记>学习笔记</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = nlp>nlp</a>
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -423,6 +449,22 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -570,6 +612,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
